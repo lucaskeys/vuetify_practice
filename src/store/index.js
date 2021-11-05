@@ -11,7 +11,20 @@ export default new Vuex.Store({
       { id: 3, title: 'Golf', complete: false },
     ],
   },
-  mutations: {},
+  mutations: {
+    addTask(state, newTaskTitle) {
+      let newTask = {
+        id: Date.now(),
+        title: newTaskTitle,
+        complete: false,
+      };
+      if (!newTaskTitle) {
+        return;
+      } else {
+        state.tasks.push(newTask);
+      }
+    },
+  },
   actions: {},
   getters: {
     getTasks: (state) => {

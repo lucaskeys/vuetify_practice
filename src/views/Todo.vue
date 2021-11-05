@@ -3,8 +3,8 @@
     <!-- @click:append is a Vuetify event -->
     <!-- :append - binding events via vuetify -->
     <v-text-field
-      @click:append="addTask"
-      @keyup.enter="addTask"
+      @click:append="addNewTask(newTaskTitle)"
+      @keyup.enter="addNewTask(newTaskTitle)"
       v-model="newTaskTitle"
       clearable
       hide-details
@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 export default {
   data() {
     return {
@@ -77,6 +77,11 @@ export default {
     ...mapGetters(['getTasks']),
   },
   methods: {
+    ...mapMutations(['addTask']),
+    addNewTask(task) {
+      this.addTask(task);
+      this.newTaskTitle = '';
+    },
     markComplete(id) {
       let task = this.tasks.filter((task) => {
         return task.id === id;
@@ -88,19 +93,6 @@ export default {
       this.tasks = this.tasks.filter((task) => {
         return task.id !== id;
       });
-    },
-    addTask() {
-      let newTask = {
-        id: Date.now(),
-        title: this.newTaskTitle,
-        complete: false,
-      };
-      if (!this.newTaskTitle) {
-        console.log('please enter a task name');
-      } else {
-        this.tasks.push(newTask);
-        this.newTaskTitle = '';
-      }
     },
   },
 };
