@@ -14,7 +14,7 @@
       append-icon="mdi-plus"
     ></v-text-field>
     <!-- only display tasks if list is not 0 -->
-    <v-list v-if="tasks.length" flat class="pt-0">
+    <v-list v-if="getTasks.length" flat class="pt-0">
       <!-- <div v-for="task in tasks" :key="task.id">
         <v-list-item @click="task.complete = !task.complete">
           <template v-slot:default>
@@ -30,7 +30,7 @@
         <v-divider></v-divider>
       </div> -->
 
-      <div v-for="task in tasks" :key="task.id">
+      <div v-for="task in getTasks" :key="task.id">
         <v-list-item @click="markComplete(task.id)" :class="{ 'blue lighten-5': task.complete }">
           <template v-slot:default>
             <v-list-item-action>
@@ -66,16 +66,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
       newTaskTitle: '',
-      tasks: [
-        // { id: 1, title: 'Wake up', complete: false },
-        // { id: 2, title: 'Work', complete: false },
-        // { id: 3, title: 'Golf', complete: false },
-      ],
     };
+  },
+  computed: {
+    ...mapGetters(['getTasks']),
   },
   methods: {
     markComplete(id) {
