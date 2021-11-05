@@ -1,5 +1,20 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="about pa-5">
+    <p>
+      It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in
+      the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+      PageMaker including versions of Lorem Ipsum.
+    </p>
+    <p>
+      It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in
+      the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+      PageMaker including versions of Lorem Ipsum.
+    </p>
+
+    <p>
+      It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in
+      the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+      PageMaker including versions of Lorem Ipsum.
+    </p>
   </div>
 </template>
