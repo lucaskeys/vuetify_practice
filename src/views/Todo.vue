@@ -4,34 +4,23 @@
     <!-- :append - binding events via vuetify -->
     <field-add-task></field-add-task>
     <!-- only display tasks if list is not 0 -->
-    <task-list :getTasks="getTasks" v-if="getTasks"></task-list>
-
-    <div class="no-tasks pa-3" v-else>
-      <v-icon size="100" color="primary">mdi-check</v-icon>
-      <div class="text-h6 primary--text">No Tasks</div>
-    </div>
+    <task-list v-if="$store.state.tasks.length"></task-list>
+    <no-tasks v-else></no-tasks>
   </div>
 </template>
 
 <script>
 import FieldAddTask from '@/components/Todo/FieldAddTask.vue';
 import TaskList from '@/components/Todo/TaskList.vue';
-import { mapGetters } from 'vuex';
+import NoTasks from '../components/Todo/NoTasks.vue';
 
 export default {
-  components: { FieldAddTask, TaskList },
+  components: { FieldAddTask, TaskList, NoTasks },
 
-  computed: {
-    ...mapGetters(['getTasks']),
-  },
+  // computed: {
+  //   ...mapGetters(['getTasks']),
+  // },
 };
 </script>
 
-<style lang="sass">
-.no-tasks
-  position: absolute
-  left: 50%
-  top: 50%
-  transform: translate(-50%, -50%)
-  opacity: .5
-</style>
+<style lang="sass"></style>

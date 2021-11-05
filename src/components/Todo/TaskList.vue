@@ -1,5 +1,5 @@
 <template>
-  <v-list v-if="getTasks.length" flat class="pt-0">
+  <v-list flat class="pt-0">
     <!-- <div v-for="task in tasks" :key="task.id">
         <v-list-item @click="task.complete = !task.complete">
           <template v-slot:default>
@@ -24,9 +24,12 @@
 
 <script>
 import Task from './Task.vue';
+import { mapGetters } from 'vuex';
 export default {
-  props: ['getTasks'],
   components: { Task },
+  computed: {
+    ...mapGetters(['getTasks']),
+  },
 };
 </script>
 

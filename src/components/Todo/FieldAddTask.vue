@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 export default {
   data() {
     return {
@@ -21,10 +21,12 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(['addTask']),
+    ...mapActions({
+      newTask: 'addTask',
+    }),
     // this.$store.commit('addtask', this.newtasktitlte)
     addNewTask() {
-      this.addTask(this.newTaskTitle);
+      this.newTask(this.newTaskTitle);
       this.newTaskTitle = '';
     },
   },

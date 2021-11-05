@@ -1,26 +1,28 @@
 <template>
   <div>
-    <v-list-item @click="markComplete(task.id)" :class="{ 'blue lighten-5': task.complete }">
+    <v-list-item
+      @click="markComplete(task.id)"
+      :class="{ 'blue lighten-5': task.complete }"
+    >
       <template v-slot:default>
         <v-list-item-action>
-          <v-checkbox :input-value="task.complete" color="primary"></v-checkbox>
+          <v-checkbox
+            :input-value="task.complete"
+            color="primary"
+          ></v-checkbox>
         </v-list-item-action>
 
         <v-list-item-content>
-          <v-list-item-title :class="{ 'text-decoration-line-through': task.complete }">{{ task.title }}</v-list-item-title>
+          <v-list-item-title
+            :class="{
+              'text-decoration-line-through': task.complete,
+            }"
+            >{{ task.title }}</v-list-item-title
+          >
         </v-list-item-content>
 
         <v-list-item-action>
-          <v-btn
-            icon
-            @click.stop="
-              {
-                deleteTask(task.id);
-              }
-            "
-          >
-            <v-icon color="lighten-1 primary">mdi-delete</v-icon>
-          </v-btn>
+          <task-menu />
         </v-list-item-action>
       </template>
     </v-list-item>
@@ -30,10 +32,14 @@
 
 <script>
 import { mapMutations } from 'vuex';
+import TaskMenu from '@/components/Todo/TaskMenu.vue';
 export default {
   props: ['task'],
+  components: {
+    TaskMenu,
+  },
   methods: {
-    ...mapMutations(['addTask', 'markComplete', 'deleteTask']),
+    ...mapMutations(['addTask', 'markComplete']),
   },
 };
 </script>
