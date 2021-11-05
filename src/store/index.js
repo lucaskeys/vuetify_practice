@@ -24,6 +24,17 @@ export default new Vuex.Store({
         state.tasks.push(newTask);
       }
     },
+    markComplete(state, id) {
+      let task = state.tasks.filter((task) => {
+        return task.id === id;
+      });
+      task[0].complete = !task[0].complete;
+    },
+    deleteTask(state, id) {
+      state.tasks = state.tasks.filter((task) => {
+        return task.id !== id;
+      });
+    },
   },
   actions: {},
   getters: {

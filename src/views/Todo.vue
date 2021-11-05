@@ -2,62 +2,10 @@
   <div class="home pa-5">
     <!-- @click:append is a Vuetify event -->
     <!-- :append - binding events via vuetify -->
-    <v-text-field
-      @click:append="addNewTask(newTaskTitle)"
-      @keyup.enter="addNewTask(newTaskTitle)"
-      v-model="newTaskTitle"
-      clearable
-      hide-details
-      class="pa-3"
-      outlined
-      label="Add Task"
-      append-icon="mdi-plus"
-    ></v-text-field>
+    <field-add-task></field-add-task>
     <!-- only display tasks if list is not 0 -->
-    <v-list v-if="getTasks.length" flat class="pt-0">
-      <!-- <div v-for="task in tasks" :key="task.id">
-        <v-list-item @click="task.complete = !task.complete">
-          <template v-slot:default>
-            <v-list-item-action>
-              <v-checkbox :input-value="task.done" color="primary"></v-checkbox>
-            </v-list-item-action>
+    <task-list :getTasks="getTasks" v-if="getTasks"></task-list>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ task.title }}</v-list-item-title>
-            </v-list-item-content>
-          </template>
-        </v-list-item>
-        <v-divider></v-divider>
-      </div> -->
-
-      <div v-for="task in getTasks" :key="task.id">
-        <v-list-item @click="markComplete(task.id)" :class="{ 'blue lighten-5': task.complete }">
-          <template v-slot:default>
-            <v-list-item-action>
-              <v-checkbox :input-value="task.complete" color="primary"></v-checkbox>
-            </v-list-item-action>
-
-            <v-list-item-content>
-              <v-list-item-title :class="{ 'text-decoration-line-through': task.complete }">{{ task.title }}</v-list-item-title>
-            </v-list-item-content>
-
-            <v-list-item-action>
-              <v-btn
-                icon
-                @click.stop="
-                  {
-                    deleteTask(task.id);
-                  }
-                "
-              >
-                <v-icon color="lighten-1 primary">mdi-delete</v-icon>
-              </v-btn>
-            </v-list-item-action>
-          </template>
-        </v-list-item>
-        <v-divider></v-divider>
-      </div>
-    </v-list>
     <div class="no-tasks pa-3" v-else>
       <v-icon size="100" color="primary">mdi-check</v-icon>
       <div class="text-h6 primary--text">No Tasks</div>
@@ -66,34 +14,15 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+import FieldAddTask from '@/components/Todo/FieldAddTask.vue';
+import TaskList from '@/components/Todo/TaskList.vue';
+import { mapGetters } from 'vuex';
+
 export default {
-  data() {
-    return {
-      newTaskTitle: '',
-    };
-  },
+  components: { FieldAddTask, TaskList },
+
   computed: {
     ...mapGetters(['getTasks']),
-  },
-  methods: {
-    ...mapMutations(['addTask']),
-    addNewTask(task) {
-      this.addTask(task);
-      this.newTaskTitle = '';
-    },
-    markComplete(id) {
-      let task = this.tasks.filter((task) => {
-        return task.id === id;
-      });
-      task[0].complete = !task[0].complete;
-    },
-
-    deleteTask(id) {
-      this.tasks = this.tasks.filter((task) => {
-        return task.id !== id;
-      });
-    },
   },
 };
 </script>
