@@ -26,6 +26,18 @@
       v-if="dialogs.delete"
       @close="dialogs.delete = false"
     />
+
+    <dialog-delete
+      :task="task"
+      v-if="dialogs.delete"
+      @close="dialogs.delete = false"
+    />
+
+    <dialog-delete
+      :task="task"
+      v-if="dialogs.delete"
+      @close="dialogs.delete = false"
+    />
   </div>
 </template>
 
